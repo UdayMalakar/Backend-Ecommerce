@@ -117,7 +117,7 @@ exports.getAllUserProduct =async(req,res)=>{
     }
 };
 
-exports.getAllProducts("/data",async(req,res)=>{
+exports.getAllProducts= async(req,res)=>{
        try{
 
         const getData=await Product.find({});
@@ -137,4 +137,4 @@ exports.getAllProducts("/data",async(req,res)=>{
             message:"Somthing went wrong"
         })
        }
-})
+};
