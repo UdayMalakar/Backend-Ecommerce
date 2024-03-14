@@ -100,7 +100,7 @@ exports.getAllOrder =async(req,res)=>{
         .json({
             success:true,
             message:"data mil gya",
-            data:response
+            response
         })
 
     }catch(error)
