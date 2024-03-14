@@ -59,7 +59,8 @@ exports.signUp= async (req,res)=>{
         return res.status(500)
         .json({
             success:false,
-            message:"Somthing went wrong here"
+            message:"Somthing went wrong here",
+            error:error
         })
     }
 };
@@ -120,7 +121,8 @@ exports.login = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             success: false,
-            message: "Something Went wrong"
+            message: "Something Went wrong",
+            error:error,
         });
     }
 };
