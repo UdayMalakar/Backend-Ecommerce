@@ -92,7 +92,7 @@ exports.getAllOrder =async(req,res)=>{
         {
             let dataId=orderArray[i];
 
-            data = await Order.findById(dataId);
+            let data = await Order.findById(dataId);
             response.push(data);
         }
 
