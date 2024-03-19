@@ -1,5 +1,6 @@
 const User = require("../models/userSchema");
 const Product =require("../models/productSchema");
+const {uploadImageToCloudinary}= require("../config/imageUploader");
 exports.addProduct = async(req,res)=>{
     try{
         const Id =req.params.id;
@@ -140,3 +141,54 @@ exports.getAllProducts = async(req,res)=>{
         })
     }
 }
+
+//product create by admin
+
+
+exports.createProduct = async(req,res)=>{
+    try{
+         const {name,categoryArray,price,totalPrice,off,description,category}=req.body;
+
+         if(!name || !price || !totalPrice || !off || !description || !category){
+            return res.status(401).
+            json({
+                success:false,
+                message:"Please Enter all the fields"
+            })
+         };
+
+         const productImage = req.files.img;
+         const cloudinary = require('cloudinary').v2
+
+
+         const thumbnailImage = await uploadImageToCloudinary(
+            productImage,
+            process.env.FOLDER_NAME,
+          )
+          console.log(thumbnailImage)
+
+         const newProduct = await Product.create({
+            name,
+            categoryArray,
+            price,
+            totalPrice,
+            off,
+            description,
+            category
+         })
+
+         return res.status(200).json({
+            success:true,
+            message:"Product created Successfully"
+         })
+
+    }catch(error)
+    {
+        console.log(error);
+        return res.status(500)
+        .json({
+            success:false,
+            message:"Somthing Went Wrong here"
+        })
+    }
+};

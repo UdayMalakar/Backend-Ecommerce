@@ -69,19 +69,20 @@ exports.signUp= async (req,res)=>{
 
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const {email, password } = req.body;
         if (!email || !password) {
             return res.status(403).json({
                 success: false,
                 message: "Please enter all the fields"
             });
         }
-
-        let userExist = await user.findOne({ email: email });
+        console.log(email)
+        let userExist = await user.findOne({email:email});
+        
         if (!userExist) {
             return res.status(404).json({
                 success: false,
-                message: "User Not found, please enter correct email"
+                message: "User Not found, please enter correct email",
             });
         }
 

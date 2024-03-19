@@ -33,3 +33,26 @@ exports.auth = async (req, res, next) => {
         });
     }
 };
+
+exports.isAdmin = async(req,res,next)=>{
+    try{
+        if(req.user.role!=="Admin")
+        {
+            return res.status(403)
+            .json({
+                success:false,
+                message:"This is Protected Route for Admin"
+            })
+        }
+
+        next();
+    }catch(error)
+    {
+        console.log(error)
+        return res.status(500)
+        .json({
+            success:false,
+            message:"Somthing went wrong this route"
+        })
+    }
+}

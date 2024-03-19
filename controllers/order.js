@@ -112,4 +112,5 @@ exports.getAllOrder =async(req,res)=>{
             message:"somthing went wrong"
         })
     }
-}
+};
+
