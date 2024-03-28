@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const {signUp,login} = require("../controllers/Auth");
-const {auth} =require("../middlewares/auth");
-const {addProduct, removeProduct, getAllUserProduct} =require("../controllers/product");
-const {getOrder,orderCancel,getAllOrder} =require("../controllers/order");
+const {auth, isAdmin} =require("../middlewares/auth");
+const {addProduct, removeProduct, getAllUserProduct,createProduct,updateProduct,deleteProduct} =require("../controllers/product");
+const {getOrder,orderCancel,getAllOrder,OrderDeleverd,getOrderDetailes} =require("../controllers/order");
 router.post("/signup",signUp);
 router.post("/login",login);
 router.get("/test",auth,(req,res)=>{
@@ -23,4 +23,8 @@ router.post("/getOrder",auth,getOrder);
 router.put("/cancelOrder/:oId",auth,orderCancel);
 router.put("/orderDeliverd/:oId",auth,OrderDeleverd)
 router.get("/getAllOrder",auth,getAllOrder);
+router.post("/uploadProduct",auth,isAdmin,createProduct);
+router.put("/updateProduct/:id",auth,isAdmin,updateProduct);
+router.delete("/deleteProduct/:id",auth,isAdmin,deleteProduct)
+
 module.exports=router;

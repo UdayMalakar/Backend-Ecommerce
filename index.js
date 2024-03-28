@@ -7,11 +7,8 @@ const router = require("./routes/userRoutes");
 require("dotenv").config();
 const cookieParser =require("cookie-parser");
 const cors = require('cors');
-<<<<<<< HEAD
 const fileupload=require("express-fileupload");
 
-=======
->>>>>>> 44f4679a6d3f3e886fcdab18dfd8b208204bc953
 const product=require("./models/productSchema");
 const order =require("./models/orderhHisSchema")
 const PORT= process.env.PORT || 5000;
