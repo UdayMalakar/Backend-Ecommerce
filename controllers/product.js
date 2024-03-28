@@ -147,9 +147,15 @@ exports.getAllProducts = async(req,res)=>{
 
 exports.createProduct = async(req,res)=>{
     try{
-         const {name,categoryArray,price,totalPrice,off,description,category}=req.body;
+       
+         console.log(req.user.id)
+         const {name,price,categoryArray,totalPrice,off,description,category}=req.body;
 
-         if(!name || !price || !totalPrice || !off || !description || !category){
+         console.log(name);
+         console.log(price);
+
+
+         if(!name || !price || !category || !categoryArray || !totalPrice || !off || !description){
             return res.status(401).
             json({
                 success:false,
@@ -158,23 +164,25 @@ exports.createProduct = async(req,res)=>{
          };
 
          const productImage = req.files.img;
-         const cloudinary = require('cloudinary').v2
 
+        console.log(productImage);
 
          const thumbnailImage = await uploadImageToCloudinary(
             productImage,
-            process.env.FOLDER_NAME,
+            "myfolder"
           )
-          console.log(thumbnailImage)
+          console.log("product image URL",thumbnailImage)
 
          const newProduct = await Product.create({
             name,
-            categoryArray,
+             categoryArray,
             price,
-            totalPrice,
-            off,
+            img:thumbnailImage.url,
+             totalPrice,
+             off,
             description,
-            category
+            category,
+            adminId:req.user.id
          })
 
          return res.status(200).json({
@@ -190,5 +198,82 @@ exports.createProduct = async(req,res)=>{
             success:false,
             message:"Somthing Went Wrong here"
         })
+    }
+};
+
+
+// Assuming you've already set up your Express Router and imported necessary modules
+
+// Define a route for updating a product
+  exports.updateProduct= async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        // Check if the product exists
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found'
+            });
+        }
+
+        // Extract the fields to be updated from the request body
+        Object.assign(product, req.body);
+        // const { name, price, categoryArray, totalPrice, off, description, category } = req.body;
+
+        // // Update the product object
+        // product.name = name;
+        // product.price = price;
+        // product.categoryArray = categoryArray;
+        // product.totalPrice = totalPrice;
+        // product.off = off;
+        // product.description = description;
+        // product.category = category;
+
+        // Save the updated product
+        const updatedProduct = await product.save();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Product updated successfully',
+            data: updatedProduct
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong'
+        });
+    }
+};
+
+
+exports.deleteProduct= async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        // Check if the product exists
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: 'Product not found'
+            });
+        }
+
+        // Delete the product
+        await Product.findByIdAndDelete(productId);
+
+        return res.status(200).json({
+            success: true,
+            message: 'Product deleted successfully'
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong'
+        });
     }
 };

@@ -11,9 +11,10 @@ const productSchema= new mongoose.Schema({
     },
     categoryArray:[{
         type:String,
+        required:true
     }],
     price:{
-        type:Number,
+        type:String,
         required:true,
     },
     totalPrice:{
@@ -31,6 +32,10 @@ const productSchema= new mongoose.Schema({
     off:{
         type:Number,
         required:true
+    },
+    adminId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
     }
 });
 
