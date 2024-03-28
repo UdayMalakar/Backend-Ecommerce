@@ -128,7 +128,7 @@ exports.getAllProducts = async(req,res)=>{
         .json({
             success:true,
             message:"Data aa gya",
-            data:getData
+            getData
         })
 
     }catch(error)
