@@ -93,7 +93,7 @@ exports.getAllOrder =async(req,res)=>{
         {
             let dataId=orderArray[i];
 
-            data = await Order.findById(dataId);
+            let data = await Order.findById(dataId);
             response.push(data);
         }
 
@@ -101,7 +101,7 @@ exports.getAllOrder =async(req,res)=>{
         .json({
             success:true,
             message:"data mil gya",
-            data:response
+            response
         })
 
     }catch(error)
@@ -113,6 +113,7 @@ exports.getAllOrder =async(req,res)=>{
             message:"somthing went wrong"
         })
     }
+<<<<<<< HEAD
 };
 
 exports.orderTaken = async(req,res)=>{
@@ -227,3 +228,6 @@ exports.getOrderDetailes = async (req,res)=>{
         })
     }
 }
+=======
+}
+>>>>>>> 44f4679a6d3f3e886fcdab18dfd8b208204bc953
