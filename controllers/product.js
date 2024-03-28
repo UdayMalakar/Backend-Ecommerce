@@ -118,7 +118,6 @@ exports.getAllUserProduct =async(req,res)=>{
     }
 };
 
-<<<<<<< HEAD
 
 exports.getAllProducts = async(req,res)=>{
     try{
@@ -134,28 +133,12 @@ exports.getAllProducts = async(req,res)=>{
 
     }catch(error)
     {
-=======
-exports.getAllProducts= async(req,res)=>{
-       try{
-
-        const getData=await Product.find({});
-        return res.status(200)
-        .json({
-            success:true,
-            message:"data aa gya",
-            getData,
-        })
-
-       }catch(error)
-       {
->>>>>>> 44f4679a6d3f3e886fcdab18dfd8b208204bc953
         console.log(error);
         return res.status(500)
         .json({
             success:false,
             message:"Somthing went wrong"
         })
-<<<<<<< HEAD
     }
 }
 
@@ -293,7 +276,4 @@ exports.deleteProduct= async (req, res) => {
             message: 'Something went wrong'
         });
     }
-=======
-       }
->>>>>>> 44f4679a6d3f3e886fcdab18dfd8b208204bc953
 };

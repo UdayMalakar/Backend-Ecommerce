@@ -113,7 +113,6 @@ exports.getAllOrder =async(req,res)=>{
             message:"somthing went wrong"
         })
     }
-<<<<<<< HEAD
 };
 
 exports.orderTaken = async(req,res)=>{
@@ -228,6 +227,3 @@ exports.getOrderDetailes = async (req,res)=>{
         })
     }
 }
-=======
-}
->>>>>>> 44f4679a6d3f3e886fcdab18dfd8b208204bc953
