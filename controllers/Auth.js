@@ -127,3 +127,27 @@ exports.login = async (req, res) => {
         });
     }
 };
+
+
+exports.CustmoreDetailes = async(req,res)=>{
+    try{
+
+        const getUser=await user.find({});
+
+        return res.status(200)
+        .json({
+            success:true,
+            message:"Data aa gya",
+            getUser
+        })
+
+    }catch(error)
+    {
+        console.log(error);
+        return res.status(500)
+        .json({
+            success:false,
+            message:"Somthing went wrong"
+        })
+    }
+}
