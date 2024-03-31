@@ -200,6 +200,16 @@ exports.getOrderDetailes = async (req,res)=>{
             })
         };
 
+        const findUser=await User.findById(findOrder.user);
+
+        if(!findUser)
+        {
+            return res.status(404)
+            .json({
+                success:false,
+                message:"User nhi dhund paya order se realted"
+            })
+        }
         let response=[];
         for(let i=0;i<findOrder.products.length;i++)
         {
@@ -214,7 +224,9 @@ exports.getOrderDetailes = async (req,res)=>{
         .json({
             success:true,
             message:"sara Data mil gya ek oreder ka",
-            response
+            response,
+            findOrder,
+            findUser
         })
     
     }catch(error)
