@@ -22,7 +22,7 @@ router.get("/getProduct",auth,getAllUserProduct);
 router.get("/data",getAllProducts)
 router.post("/getOrder",auth,getOrder);
 router.put("/cancelOrder/:oId",auth,orderCancel);
-router.put("/orderDeliverd/:oId",auth,OrderDeleverd)
+router.put("/orderDeliverd/:oId",auth,isAdmin,OrderDeleverd)
 router.get("/getAllOrder",auth,getAllOrder);
 router.post("/uploadProduct",auth,isAdmin,createProduct);
 router.put("/updateProduct/:id",auth,isAdmin,updateProduct);
