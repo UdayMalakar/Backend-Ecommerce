@@ -26,8 +26,8 @@ router.put("/orderDeliverd/:oId",auth,isAdmin,OrderDeleverd)
 router.get("/getAllOrder",auth,getAllOrder);
 router.post("/uploadProduct",auth,isAdmin,createProduct);
 router.put("/updateProduct/:id",auth,isAdmin,updateProduct);
-router.get("/orders",auth,isAdmin,orderTaken)
+router.get("/orders",auth,orderTaken)
 router.delete("/deleteProduct/:id",auth,isAdmin,deleteProduct);
-router.get("/customers-detailes",auth,isAdmin,CustmoreDetailes);
-router.get("/order-detailes/:oId",auth,isAdmin,getOrderDetailes);
+router.get("/customers-detailes",auth,CustmoreDetailes);
+router.get("/order-detailes/:oId",auth,getOrderDetailes);
 module.exports=router;
